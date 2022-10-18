@@ -1,6 +1,6 @@
 
 import Dashboard from "views/Dashboard.js";
-import Room from "views/UserProfile.js";
+import Room from "views/Rooms.js";
 import Package from "views/TableList.js";
 import ClientDetail from "views/Typography.js";
 import ViewPackage from "views/Icons.js";
@@ -39,7 +39,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/packagedetails",
+    path: "/packages-details",
     name: "view packages",
     icon: "nc-icon nc-atom",
     component: ViewPackage,
