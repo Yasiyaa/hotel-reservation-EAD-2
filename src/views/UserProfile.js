@@ -19,7 +19,7 @@ function User() {
           <Col >
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Add Room</Card.Title>
+                <Card.Title as="h4">Manage Room</Card.Title>
               </Card.Header>
               <Card.Body>
                 <Form>          {/* Form details */}
@@ -143,6 +143,22 @@ function User() {
                     variant="info"
                   >
                     Add
+                  </Button>
+
+                  <Button
+                    className="btn"
+                    type="submit"
+                    variant="info"
+                  >
+                    Update
+                  </Button>
+
+                  <Button
+                    className="btn"
+                    type="submit"
+                    variant="info"
+                  >
+                    Delete
                   </Button>
 
 

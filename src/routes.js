@@ -39,7 +39,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/packages-details",
+    path: "/packagedetails",
     name: "view packages",
     icon: "nc-icon nc-atom",
     component: ViewPackage,
@@ -50,13 +50,6 @@ const dashboardRoutes = [
     name: "make reservation",
     icon: "nc-icon nc-pin-3",
     component: Reservation,
-    layout: "/admin"
-  },
-  {
-    path: "/reservation-update-data",
-    name: "edit reservation",
-    icon: "nc-icon nc-bell-55",
-    component: EditReservation,
     layout: "/admin"
   }
 
