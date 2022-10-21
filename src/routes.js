@@ -1,11 +1,11 @@
 
 import Dashboard from "views/Dashboard.js";
 import Room from "views/Rooms.js";
-import Package from "views/TableList.js";
-import ClientDetail from "views/Typography.js";
-import ViewPackage from "views/Icons.js";
-import Reservation from "views/Maps.js";
-import EditReservation from "views/Notifications.js";
+import Package from "views/Packages.js";
+import ClientDetail from "views/Client.js";
+import ViewPackage from "views/ViewPackages.js";
+import Reservation from "views/MakeReservation.js";
+
 
 
 const dashboardRoutes = [
@@ -39,7 +39,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/packages-details",
+    path: "/packege-details",
     name: "view packages",
     icon: "nc-icon nc-atom",
     component: ViewPackage,
