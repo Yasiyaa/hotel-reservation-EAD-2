@@ -10,7 +10,8 @@ import {
     Container,
     Row,
     Col,
-    Card
+    Card,
+    Table
 } from "react-bootstrap";
 
 function Maps() {
@@ -28,33 +29,27 @@ function Maps() {
                                 <Row>
                                     <Col className="pr-1" md="5">
                                         <Form.Group>
-                                            <label>Company (disabled)</label>
+                                            <label>Client ID</label>
                                             <Form.Control
-                                                defaultValue="Creative Code Inc."
-                                                disabled
-                                                placeholder="Company"
                                                 type="text"
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col className="px-1" md="3">
                                         <Form.Group>
-                                            <label>Username</label>
+                                            <label>Package ID</label>
                                             <Form.Control
-                                                defaultValue="michael23"
-                                                placeholder="Username"
                                                 type="text"
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col className="pl-1" md="4">
                                         <Form.Group>
-                                            <label htmlFor="exampleInputEmail1">
-                                                Email address
+                                            <label>
+                                                Room ID
                                             </label>
                                             <Form.Control
-                                                placeholder="Email"
-                                                type="email"
+                                                type="text"
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -62,33 +57,17 @@ function Maps() {
                                 <Row>
                                     <Col className="pr-1" md="6">
                                         <Form.Group>
-                                            <label>First Name</label>
+                                            <label>Check in date</label>
                                             <Form.Control
-                                                defaultValue="Mike"
-                                                placeholder="Company"
-                                                type="text"
+                                                type="date"
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col className="pl-1" md="6">
                                         <Form.Group>
-                                            <label>Last Name</label>
+                                            <label>Check out date</label>
                                             <Form.Control
-                                                defaultValue="Andrew"
-                                                placeholder="Last Name"
-                                                type="text"
-                                            ></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col md="12">
-                                        <Form.Group>
-                                            <label>Address</label>
-                                            <Form.Control
-                                                defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                placeholder="Home Address"
-                                                type="text"
+                                                type="date"
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -96,72 +75,48 @@ function Maps() {
                                 <Row>
                                     <Col className="pr-1" md="4">
                                         <Form.Group>
-                                            <label>City</label>
+                                            <label>Number of group members</label>
                                             <Form.Control
-                                                defaultValue="Mike"
-                                                placeholder="City"
-                                                type="text"
-                                            ></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                    <Col className="px-1" md="4">
-                                        <Form.Group>
-                                            <label>Country</label>
-                                            <Form.Control
-                                                defaultValue="Andrew"
-                                                placeholder="Country"
-                                                type="text"
-                                            ></Form.Control>
-                                        </Form.Group>
-                                    </Col>
-                                    <Col className="pl-1" md="4">
-                                        <Form.Group>
-                                            <label>Postal Code</label>
-                                            <Form.Control
-                                                placeholder="ZIP Code"
+                                                defaultValue="2"
+                                                min="2"
                                                 type="number"
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
+
                                 </Row>
+
                                 <Row>
-                                    <Col md="12">
-                                        <Form.Group>
-                                            <label>About Me</label>
-                                            <Form.Control
-                                                cols="80"
-                                                defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                          that two seat Lambo."
-                                                placeholder="Here can be your description"
-                                                rows="4"
-                                                as="textarea"
-                                            ></Form.Control>
-                                        </Form.Group>
+                                    <Col >
+                                        <Button
+                                            className="btn-fill pull-right"
+                                            type="submit"
+                                            variant="info"
+                                        >
+                                            Add
+                                        </Button>
+                                    </Col>
+
+                                    <Col >
+                                        <Button
+                                            className="btn-fill pull-right"
+                                            type="submit"
+                                            variant="info"
+                                        >
+                                            Update
+                                        </Button>
+                                    </Col>
+
+                                    <Col >
+                                        <Button
+                                            className="btn-fill pull-right"
+                                            type="submit"
+                                            variant="info"
+                                        >
+                                            Delete
+                                        </Button>
                                     </Col>
                                 </Row>
-                                <Button
-                                    className="btn-fill pull-right"
-                                    type="submit"
-                                    variant="info"
-                                >
-                                    Add
-                                </Button>
-
-                                <Button
-                                    className="btn"
-                                    type="submit"
-                                    variant="info"
-                                >
-                                    Update
-                                </Button>
-
-                                <Button
-                                    className="btn"
-                                    type="submit"
-                                    variant="info"
-                                >
-                                    Delete
-                                </Button>
 
 
                                 <div className="clearfix"></div>
@@ -171,7 +126,46 @@ function Maps() {
 
                 </Col>
             </Row>
+
+            <Row>
+                <Col>
+                    <Card>                               {/*Client details table */}
+                        <Card.Header>
+                            <Card.Title as="h4">My Reservations</Card.Title>
+                        </Card.Header>
+                        <Card.Body>
+                            <Table className="table-hover">
+                                <thead>
+                                    <tr>
+                                        <th className="border-0">Client ID</th>
+                                        <th className="border-0">Package ID</th>
+                                        <th className="border-0">Room Id</th>
+                                        <th className="border-0">Check In Date</th>
+                                        <th className="border-0">Check Out Date</th>
+                                        <th className="border-0">Group size</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Dakota Rice</td>
+                                        <td>$36,738</td>
+                                        <td>2022.6.7</td>
+                                        <td>2022.10.4</td>
+                                        <td>2</td>
+
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Card.Body>
+
+                    </Card>
+                </Col>
+            </Row>
         </Container>
+
+
     );
 }
 

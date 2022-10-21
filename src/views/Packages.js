@@ -10,6 +10,7 @@ import {
     Container,
     Row,
     Col,
+    Dropdown
 } from "react-bootstrap";
 
 function Packages() {
@@ -27,33 +28,38 @@ function Packages() {
                                     <Row>
                                         <Col className="pr-1" md="5">
                                             <Form.Group>
-                                                <label>Company (disabled)</label>
+                                                <label>Package ID</label>
                                                 <Form.Control
-                                                    defaultValue="Creative Code Inc."
-                                                    disabled
-                                                    placeholder="Company"
+                                                    placeholder="Package ID"
                                                     type="text"
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                         <Col className="px-1" md="3">
                                             <Form.Group>
-                                                <label>Username</label>
-                                                <Form.Control
-                                                    defaultValue="michael23"
-                                                    placeholder="Username"
-                                                    type="text"
-                                                ></Form.Control>
+                                                <label></label>
+                                                <div >
+                                                    <Dropdown >
+                                                        <Dropdown.Toggle id="dropdown-basic">
+                                                            Package Type
+                                                        </Dropdown.Toggle>
+
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item >Honeymoon</Dropdown.Item>
+                                                            <Dropdown.Item >Dayout</Dropdown.Item>
+                                                            <Dropdown.Item >BirthDay Event</Dropdown.Item>
+
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="4">
                                             <Form.Group>
-                                                <label htmlFor="exampleInputEmail1">
-                                                    Email address
-                                                </label>
+                                                <label>Price</label>
                                                 <Form.Control
-                                                    placeholder="Email"
-                                                    type="email"
+                                                    placeholder="Price"
+                                                    type="text"
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -61,76 +67,37 @@ function Packages() {
                                     <Row>
                                         <Col className="pr-1" md="6">
                                             <Form.Group>
-                                                <label>First Name</label>
+                                                <label>Minimum Group members count</label>
                                                 <Form.Control
-                                                    defaultValue="Mike"
-                                                    placeholder="Company"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="6">
-                                            <Form.Group>
-                                                <label>Last Name</label>
-                                                <Form.Control
-                                                    defaultValue="Andrew"
-                                                    placeholder="Last Name"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md="12">
-                                            <Form.Group>
-                                                <label>Address</label>
-                                                <Form.Control
-                                                    defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                                    placeholder="Home Address"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="pr-1" md="4">
-                                            <Form.Group>
-                                                <label>City</label>
-                                                <Form.Control
-                                                    defaultValue="Mike"
-                                                    placeholder="City"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="px-1" md="4">
-                                            <Form.Group>
-                                                <label>Country</label>
-                                                <Form.Control
-                                                    defaultValue="Andrew"
-                                                    placeholder="Country"
-                                                    type="text"
-                                                ></Form.Control>
-                                            </Form.Group>
-                                        </Col>
-                                        <Col className="pl-1" md="4">
-                                            <Form.Group>
-                                                <label>Postal Code</label>
-                                                <Form.Control
-                                                    placeholder="ZIP Code"
+                                                    defaultValue="2"
+                                                    placeholder="count"
+                                                    min="2"
                                                     type="number"
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
+
                                     </Row>
                                     <Row>
                                         <Col md="12">
                                             <Form.Group>
-                                                <label>About Me</label>
+                                                <label>Activities</label>
+                                                <Form.Control
+                                                    defaultValue=""
+                                                    placeholder="Activities"
+                                                    type="text"
+                                                ></Form.Control>
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+
+                                    <Row>
+                                        <Col md="12">
+                                            <Form.Group>
+                                                <label>About the Package</label>
                                                 <Form.Control
                                                     cols="80"
-                                                    defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                          that two seat Lambo."
+                                                    defaultValue="Package Includes: Lunch buffet, Evening snack & tea, complimentary room, pool access, pet-friendly environment"
                                                     placeholder="Here can be your description"
                                                     rows="4"
                                                     as="textarea"
@@ -138,29 +105,37 @@ function Packages() {
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    <Button
-                                        className="btn-fill pull-right"
-                                        type="submit"
-                                        variant="info"
-                                    >
-                                        Add
-                                    </Button>
+                                    <Row>
+                                        <Col >
+                                            <Button
+                                                className="btn-fill pull-right"
+                                                type="submit"
+                                                variant="info"
+                                            >
+                                                Add
+                                            </Button>
+                                        </Col>
 
-                                    <Button
-                                        className="btn"
-                                        type="submit"
-                                        variant="info"
-                                    >
-                                        Update
-                                    </Button>
+                                        <Col >
+                                            <Button
+                                                className="btn-fill pull-right"
+                                                type="submit"
+                                                variant="info"
+                                            >
+                                                Update
+                                            </Button>
+                                        </Col>
 
-                                    <Button
-                                        className="btn"
-                                        type="submit"
-                                        variant="info"
-                                    >
-                                        Delete
-                                    </Button>
+                                        <Col >
+                                            <Button
+                                                className="btn-fill pull-right"
+                                                type="submit"
+                                                variant="info"
+                                            >
+                                                Delete
+                                            </Button>
+                                        </Col>
+                                    </Row>
 
 
                                     <div className="clearfix"></div>

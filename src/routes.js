@@ -19,14 +19,14 @@ const dashboardRoutes = [
   },
   {
     path: "/rooms",
-    name: "Room Handling",
+    name: "Room handling",
     icon: "nc-icon nc-circle-09",
     component: Room,
     layout: "/admin"
   },
   {
     path: "/packages",
-    name: "Package Handling",
+    name: "Package handling",
     icon: "nc-icon nc-notes",
     component: Package,
     layout: "/admin"
@@ -40,14 +40,14 @@ const dashboardRoutes = [
   },
   {
     path: "/packege-details",
-    name: "view packages",
+    name: "View packages",
     icon: "nc-icon nc-atom",
     component: ViewPackage,
     layout: "/admin"
   },
   {
     path: "/reservation-details",
-    name: "make reservation",
+    name: "Make reservation",
     icon: "nc-icon nc-pin-3",
     component: Reservation,
     layout: "/admin"
