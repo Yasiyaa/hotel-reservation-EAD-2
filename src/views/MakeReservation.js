@@ -1,11 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 // react-bootstrap components
 import {
-    Badge,
     Button,
-    Navbar,
-    Nav,
     Form,
     Container,
     Row,
@@ -16,6 +13,27 @@ import {
 
 function Maps() {
 
+    const [clientId, setClientId] = useState('');
+    const [packageId, setpackageId] = useState('');
+    const [roomId, setroomId] = useState('');
+    const [CheckInDate, setCheckInDate] = useState('');
+    const [checkOutDate, setcheckOutDate] = useState('');
+    const [members, setmembers] = useState('');
+
+    function addHandler(e) {
+        e.preventDefault();
+
+        console.log(clientId, packageId, roomId, CheckInDate, checkOutDate, members)
+    }
+
+    const url = ""
+
+    function submitHandler(e) {
+        e.preventDefault();
+
+
+    }
+
     return (
         <Container fluid>
             <Row>
@@ -25,13 +43,15 @@ function Maps() {
                             <Card.Title as="h4">Make Reservation</Card.Title>
                         </Card.Header>
                         <Card.Body>
-                            <Form>          {/* Form details */}
+                            <Form onSubmit={submitHandler}>          {/* Form details */}
                                 <Row>
                                     <Col className="pr-1" md="5">
                                         <Form.Group>
                                             <label>Client ID</label>
                                             <Form.Control
                                                 type="text"
+                                                value={clientId}
+                                                onChange={(e) => setClientId(e.target.value)}
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -40,6 +60,8 @@ function Maps() {
                                             <label>Package ID</label>
                                             <Form.Control
                                                 type="text"
+                                                value={packageId}
+                                                onChange={(e) => setpackageId(e.target.value)}
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -50,6 +72,8 @@ function Maps() {
                                             </label>
                                             <Form.Control
                                                 type="text"
+                                                value={roomId}
+                                                onChange={(e) => setroomId(e.target.value)}
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -60,6 +84,8 @@ function Maps() {
                                             <label>Check in date</label>
                                             <Form.Control
                                                 type="date"
+                                                value={CheckInDate}
+                                                onChange={(e) => setCheckInDate(e.target.value)}
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -68,6 +94,8 @@ function Maps() {
                                             <label>Check out date</label>
                                             <Form.Control
                                                 type="date"
+                                                value={checkOutDate}
+                                                onChange={(e) => setcheckOutDate(e.target.value)}
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -80,6 +108,8 @@ function Maps() {
                                                 defaultValue="2"
                                                 min="2"
                                                 type="number"
+                                                value={members}
+                                                onChange={(e) => setmembers(e.target.value)}
                                             ></Form.Control>
                                         </Form.Group>
                                     </Col>
@@ -90,8 +120,9 @@ function Maps() {
                                     <Col >
                                         <Button
                                             className="btn-fill pull-right"
-                                            type="submit"
                                             variant="info"
+                                            type="submit"
+                                            onClick={addHandler}
                                         >
                                             Add
                                         </Button>
@@ -129,7 +160,7 @@ function Maps() {
 
             <Row>
                 <Col>
-                    <Card>                               {/*Client details table */}
+                    <Card>                               {/*Reservation details tables */}
                         <Card.Header>
                             <Card.Title as="h4">My Reservations</Card.Title>
                         </Card.Header>
