@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // react-bootstrap components
 import {
@@ -14,6 +14,22 @@ import {
 } from "react-bootstrap";
 
 function Packages() {
+
+    const [packageId, SetPackageId] = useState('');
+    const [packageType, SetPackageType] = useState('Dayout');
+    const [PackagePrice, SetPackagePrice] = useState('');
+    const [Members, SetMembers] = useState('');
+    const [Activities, SetActivities] = useState('');
+    const [AboutPackage, SetAboutPackage] = useState('');
+
+    function addHandler(e) {
+        e.preventDefault();
+
+        console.log(packageId, packageType, PackagePrice, Members, Activities, AboutPackage);
+
+
+
+    }
     return (
         <>
             <Container fluid>
@@ -32,26 +48,24 @@ function Packages() {
                                                 <Form.Control
                                                     placeholder="Package ID"
                                                     type="text"
+                                                    value={packageId}
+                                                    onChange={(e) => SetPackageId(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
                                         <Col className="px-1" md="3">
                                             <Form.Group>
-                                                <label></label>
-                                                <div >
-                                                    <Dropdown >
-                                                        <Dropdown.Toggle id="dropdown-basic">
-                                                            Package Type
-                                                        </Dropdown.Toggle>
+                                                <label>Package Type</label><br></br>
+                                                <Form.Select size="lg" value={packageType}
+                                                    onChange={(e) => SetPackageType(e.target.value)}
+                                                >
+                                                    <option value="Dayout">Dayout</option>
+                                                    <option value="Event">Event </option>
+                                                    <option value="Honeymoon">Honeymoon </option>
 
-                                                        <Dropdown.Menu>
-                                                            <Dropdown.Item >Honeymoon</Dropdown.Item>
-                                                            <Dropdown.Item >Dayout</Dropdown.Item>
-                                                            <Dropdown.Item >BirthDay Event</Dropdown.Item>
 
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
-                                                </div>
+                                                </Form.Select>
+
                                             </Form.Group>
                                         </Col>
                                         <Col className="pl-1" md="4">
@@ -60,6 +74,8 @@ function Packages() {
                                                 <Form.Control
                                                     placeholder="Price"
                                                     type="text"
+                                                    value={PackagePrice}
+                                                    onChange={(e) => SetPackagePrice(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -73,6 +89,8 @@ function Packages() {
                                                     placeholder="count"
                                                     min="2"
                                                     type="number"
+                                                    value={Members}
+                                                    onChange={(e) => SetMembers(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -86,6 +104,8 @@ function Packages() {
                                                     defaultValue=""
                                                     placeholder="Activities"
                                                     type="text"
+                                                    value={Activities}
+                                                    onChange={(e) => SetActivities(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -101,6 +121,8 @@ function Packages() {
                                                     placeholder="Here can be your description"
                                                     rows="4"
                                                     as="textarea"
+                                                    value={AboutPackage}
+                                                    onChange={(e) => SetAboutPackage(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -109,8 +131,8 @@ function Packages() {
                                         <Col >
                                             <Button
                                                 className="btn-fill pull-right"
-                                                type="submit"
                                                 variant="info"
+                                                onClick={addHandler}
                                             >
                                                 Add
                                             </Button>
@@ -149,11 +171,12 @@ function Packages() {
                                     <Table className="table-hover">
                                         <thead>
                                             <tr>
-                                                <th className="border-0">ID</th>
-                                                <th className="border-0">Name</th>
-                                                <th className="border-0">Salary</th>
-                                                <th className="border-0">Country</th>
-                                                <th className="border-0">City</th>
+                                                <th className="border-0">Package ID</th>
+                                                <th className="border-0">Package Type</th>
+                                                <th className="border-0">Price</th>
+                                                <th className="border-0">Minimum group size</th>
+                                                <th className="border-0">Activities</th>
+                                                <th className="border-0">About the package</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -162,43 +185,10 @@ function Packages() {
                                                 <td>Dakota Rice</td>
                                                 <td>$36,738</td>
                                                 <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
+                                                <td>Hiking,bird watching,Swiming</td>
+                                                <td>Package Includes: Lunch buffet, Evening snack & tea, complimentary room, pool access, pet-friendly environment</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>$63,542</td>
-                                                <td>Malawi</td>
-                                                <td>Feldkirchen in Kärnten</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>$78,615</td>
-                                                <td>Chile</td>
-                                                <td>Gloucester</td>
-                                            </tr>
+
                                         </tbody>
                                     </Table>
                                 </Card.Body>

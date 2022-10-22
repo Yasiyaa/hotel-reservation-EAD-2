@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 
 // react-bootstrap components
 import {
@@ -8,11 +9,23 @@ import {
     Container,
     Row,
     Col,
-    Table,
-    Dropdown
+    Table
+
 } from "react-bootstrap";
 
 function Rooms() {
+    const [roomId, setRoomId] = useState('');
+    const [roomType, setRoomType] = useState('Luxury');
+    const [roomPrice, SetRoomPrice] = useState('');
+    const [availableStatus, SetAvailableStatus] = useState('True');
+
+    function addHandler() {
+
+
+        console.log(roomId, roomType, roomPrice, availableStatus);
+
+    }
+
     return (
         <>
             <Container fluid>
@@ -31,25 +44,23 @@ function Rooms() {
                                                 <Form.Control
                                                     placeholder="Room ID"
                                                     type="text"
+                                                    value={roomId}
+                                                    onChange={(e) => setRoomId(e.target.value)}
+
                                                 ></Form.Control>
                                             </Form.Group>
+
+
                                         </Col>
                                         <Col className="px-1" md="3">
                                             <Form.Group>
-                                                <label>Room type</label>
-                                                <div >
-                                                    <Dropdown >
-                                                        <Dropdown.Toggle id="dropdown-basic">
-                                                            Room type
-                                                        </Dropdown.Toggle>
+                                                <label>Room Type</label><br></br>
+                                                <Form.Select size="lg" id="roomtype" value={roomType}
+                                                    onChange={(e) => setRoomType(e.target.value)}>
+                                                    <option value="luxury">Luxury</option>
+                                                    <option value="semi luxury">Semi Luxury</option>
 
-                                                        <Dropdown.Menu>
-                                                            <Dropdown.Item >Luxury</Dropdown.Item>
-                                                            <Dropdown.Item >Semi uxury</Dropdown.Item>
-
-                                                        </Dropdown.Menu>
-                                                    </Dropdown>
-                                                </div>
+                                                </Form.Select>
 
                                             </Form.Group>
                                         </Col>
@@ -61,6 +72,8 @@ function Rooms() {
                                                 <Form.Control
                                                     placeholder="Price"
                                                     type="text"
+                                                    value={roomPrice}
+                                                    onChange={(e) => SetRoomPrice(e.target.value)}
                                                 ></Form.Control>
                                             </Form.Group>
                                         </Col>
@@ -69,18 +82,14 @@ function Rooms() {
                                     <Row>
                                         <Col md="12">
                                             <Form.Group>
-                                                <label>Room available status</label>
-                                                <Dropdown>
-                                                    <Dropdown.Toggle id="dropdown-basic">
-                                                        Available status
-                                                    </Dropdown.Toggle>
+                                                <label>Room Available Status</label><br></br>
+                                                <Form.Select size="lg" id="availableStatus" value={availableStatus}
+                                                    onChange={(e) => SetAvailableStatus(e.target.value)}>
+                                                    <option value="True">True</option>
+                                                    <option value="False">False </option>
 
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item >True</Dropdown.Item>
-                                                        <Dropdown.Item >False action</Dropdown.Item>
+                                                </Form.Select>
 
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -88,8 +97,9 @@ function Rooms() {
                                         <Col >
                                             <Button
                                                 className="btn-fill pull-right"
-                                                type="submit"
                                                 variant="info"
+                                                onClick={addHandler}
+
                                             >
                                                 Add
                                             </Button>
@@ -130,11 +140,11 @@ function Rooms() {
                                     <Table className="table-hover">   {/* Room reservation details table */}
                                         <thead>
                                             <tr>
-                                                <th className="border-0">ID</th>
-                                                <th className="border-0">Name</th>
-                                                <th className="border-0">Salary</th>
-                                                <th className="border-0">Country</th>
-                                                <th className="border-0">City</th>
+                                                <th className="border-0">Room ID</th>
+                                                <th className="border-0">Room type</th>
+                                                <th className="border-0">Price</th>
+                                                <th className="border-0">Available Status</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -142,44 +152,10 @@ function Rooms() {
                                                 <td>1</td>
                                                 <td>Dakota Rice</td>
                                                 <td>$36,738</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
+                                                <td>true</td>
+
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Minerva Hooper</td>
-                                                <td>$23,789</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sage Rodriguez</td>
-                                                <td>$56,142</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Chaney</td>
-                                                <td>$38,735</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Doris Greene</td>
-                                                <td>$63,542</td>
-                                                <td>Malawi</td>
-                                                <td>Feldkirchen in Kärnten</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Mason Porter</td>
-                                                <td>$78,615</td>
-                                                <td>Chile</td>
-                                                <td>Gloucester</td>
-                                            </tr>
+
                                         </tbody>
                                     </Table>
                                 </Card.Body>
