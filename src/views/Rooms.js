@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 
 // react-bootstrap components
 import {
@@ -17,12 +17,68 @@ function Rooms() {
     const [roomId, setRoomId] = useState('');
     const [roomType, setRoomType] = useState('Luxury');
     const [roomPrice, SetRoomPrice] = useState('');
-    const [availableStatus, SetAvailableStatus] = useState('True');
+    const [availableStatus, SetAvailableStatus] = useState('true');
+    const [data, getData] = useState([])
 
-    function addHandler() {
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = () => {
+        fetch("http://localhost:8080/rooms")
+            .then((res) =>
+                res.json())
+
+            .then((response) => {
+                console.log(response);
+                getData(response);
+            })
+
+    }
+
+    function submitHandler(e) {
+
+        const url = "http://localhost:8080/rooms"
+        Axios.post(url, {
+            roomID: roomId,
+            roomType: roomType,
+            price: roomPrice,
+            status: availableStatus
+        })
+            .then(res => {
+
+                console.log("DONE")
+            })
 
 
-        console.log(roomId, roomType, roomPrice, availableStatus);
+    }
+
+    function updateHandler(e) {
+        const url = "http://localhost:8080/rooms"
+        Axios.put(url, {
+            roomID: roomId,
+            roomType: roomType,
+            price: roomPrice,
+            status: availableStatus
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
+    }
+
+    function deleteHandler(e) {
+        const url = `http://localhost:8080/rooms/${roomId}`
+        Axios.delete(url, {
+            roomID: roomId,
+
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
 
     }
 
@@ -36,7 +92,7 @@ function Rooms() {
                                 <Card.Title as="h4">Manage Room</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <Form>          {/* Form details */}
+                                <Form onSubmit={submitHandler}>          {/* Form details */}
                                     <Row>
                                         <Col className="pr-1" md="5">
                                             <Form.Group>
@@ -85,8 +141,8 @@ function Rooms() {
                                                 <label>Room Available Status</label><br></br>
                                                 <Form.Select size="lg" id="availableStatus" value={availableStatus}
                                                     onChange={(e) => SetAvailableStatus(e.target.value)}>
-                                                    <option value="True">True</option>
-                                                    <option value="False">False </option>
+                                                    <option value="true">True</option>
+                                                    <option value="false">False </option>
 
                                                 </Form.Select>
 
@@ -98,8 +154,7 @@ function Rooms() {
                                             <Button
                                                 className="btn-fill pull-right"
                                                 variant="info"
-                                                onClick={addHandler}
-
+                                                type="submit"
                                             >
                                                 Add
                                             </Button>
@@ -108,8 +163,8 @@ function Rooms() {
                                         <Col >
                                             <Button
                                                 className="btn-fill pull-right"
-                                                type="submit"
                                                 variant="info"
+                                                onClick={updateHandler}
                                             >
                                                 Update
                                             </Button>
@@ -118,8 +173,8 @@ function Rooms() {
                                         <Col >
                                             <Button
                                                 className="btn-fill pull-right"
-                                                type="submit"
                                                 variant="info"
+                                                onClick={deleteHandler}
                                             >
                                                 Delete
                                             </Button>
@@ -148,14 +203,14 @@ function Rooms() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>$36,738</td>
-                                                <td>true</td>
-
-                                            </tr>
-
+                                            {data.map((item, i) => (
+                                                <tr key={i}>
+                                                    <td>{item.roomID}</td>
+                                                    <td>{item.roomType}</td>
+                                                    <td>{item.price}</td>
+                                                    <td>{item.status}</td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </Table>
                                 </Card.Body>

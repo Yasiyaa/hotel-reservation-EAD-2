@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 
 // react-bootstrap components
 import {
@@ -13,6 +14,7 @@ import {
     Dropdown
 } from "react-bootstrap";
 
+
 function Packages() {
 
     const [packageId, SetPackageId] = useState('');
@@ -20,15 +22,79 @@ function Packages() {
     const [PackagePrice, SetPackagePrice] = useState('');
     const [Members, SetMembers] = useState('');
     const [Activities, SetActivities] = useState('');
-    const [AboutPackage, SetAboutPackage] = useState('');
+    const [AboutPackage, SetAboutPackage] = useState('Package Includes: Lunch buffet, Evening snack & tea');
+    const [data, getData] = useState([])
 
-    function addHandler(e) {
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = () => {
+        fetch("http://localhost:8081/packages")
+            .then((res) =>
+                res.json())
+
+            .then((response) => {
+                console.log(response);
+                getData(response);
+            })
+
+    }
+
+    function submitHandler(e) {
         e.preventDefault();
 
         console.log(packageId, packageType, PackagePrice, Members, Activities, AboutPackage);
 
+        const url = "http://localhost:8081/packages"
+        Axios.post(url, {
+            packageID: packageId,
+            packageType: packageType,
+            price: PackagePrice,
+            noOfPeople: Members,
+            activity: Activities,
+            aboutPackage: AboutPackage
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
 
 
+    }
+
+    function updateHandler(e) {
+
+        const url = "http://localhost:8081/packages"
+        Axios.put(url, {
+            packageID: packageId,
+            packageType: packageType,
+            price: PackagePrice,
+            noOfPeople: Members,
+            activity: Activities,
+            aboutPackage: AboutPackage
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
+
+    }
+
+    function deleteHandler(e) {
+
+        const url = `http://localhost:8081/packages/${packageId}`
+        Axios.delete(url, {
+            packageID: packageId,
+
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
     }
     return (
         <>
@@ -40,7 +106,7 @@ function Packages() {
                                 <Card.Title as="h4">Manage Packages</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <Form>          {/* Form details */}
+                                <Form onSubmit={submitHandler}>          {/* Form details */}
                                     <Row>
                                         <Col className="pr-1" md="5">
                                             <Form.Group>
@@ -117,7 +183,6 @@ function Packages() {
                                                 <label>About the Package</label>
                                                 <Form.Control
                                                     cols="80"
-                                                    defaultValue="Package Includes: Lunch buffet, Evening snack & tea, complimentary room, pool access, pet-friendly environment"
                                                     placeholder="Here can be your description"
                                                     rows="4"
                                                     as="textarea"
@@ -132,7 +197,7 @@ function Packages() {
                                             <Button
                                                 className="btn-fill pull-right"
                                                 variant="info"
-                                                onClick={addHandler}
+                                                type="submit"
                                             >
                                                 Add
                                             </Button>
@@ -141,8 +206,8 @@ function Packages() {
                                         <Col >
                                             <Button
                                                 className="btn-fill pull-right"
-                                                type="submit"
                                                 variant="info"
+                                                onClick={updateHandler}
                                             >
                                                 Update
                                             </Button>
@@ -151,8 +216,8 @@ function Packages() {
                                         <Col >
                                             <Button
                                                 className="btn-fill pull-right"
-                                                type="submit"
                                                 variant="info"
+                                                onClick={deleteHandler}
                                             >
                                                 Delete
                                             </Button>
@@ -180,15 +245,18 @@ function Packages() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dakota Rice</td>
-                                                <td>$36,738</td>
-                                                <td>Niger</td>
-                                                <td>Hiking,bird watching,Swiming</td>
-                                                <td>Package Includes: Lunch buffet, Evening snack & tea, complimentary room, pool access, pet-friendly environment</td>
-                                            </tr>
+                                            {data.map((item, i) => (
+                                                <tr key={i}>
+                                                    <td>{item.packageID}</td>
+                                                    <td>{item.packageType}</td>
+                                                    <td>{item.price}</td>
+                                                    <td>{item.noOfPeople}</td>
+                                                    <td>{item.activity}</td>
+                                                    <td>{item.aboutPackage}</td>
 
+
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </Table>
                                 </Card.Body>

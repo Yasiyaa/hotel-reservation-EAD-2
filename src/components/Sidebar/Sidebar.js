@@ -4,7 +4,6 @@ import { useLocation, NavLink } from "react-router-dom";
 
 import { Nav } from "react-bootstrap";
 
-import logo from "assets/img/reactlogo.png";
 
 function Sidebar({ color, image, routes }) {
   const location = useLocation();
@@ -21,18 +20,9 @@ function Sidebar({ color, image, routes }) {
       />
       <div className="sidebar-wrapper">
         <div className="logo d-flex align-items-center justify-content-start">
-          <a
-
-            className="simple-text logo-mini mx-1"
-          >
-            <div className="logo-img">
-              <img src="https://www.logodesign.net/logo/city-inside-shield-1950ld.png?size=2&industry=hotel" alt="..." borderadius="40" />
-            </div>
+          <div className="simple-text logo-mini mx-1">
             Hotel Reservation System
-          </a>
-
-
-
+          </div>
         </div>
         <Nav>
           {routes.map((prop, key) => {

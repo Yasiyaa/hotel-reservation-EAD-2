@@ -1,5 +1,5 @@
 
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { useLocation, Route, Switch } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
@@ -11,21 +11,23 @@ import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
 
+
 function Admin() {
-  const [image, setImage] = React.useState(sidebarImage);
-  const [color, setColor] = React.useState("black");
-  const [hasImage, setHasImage] = React.useState(true);
+
+  const [login, setLogin] = useState(true);
   const location = useLocation();
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
+
         return (
           <Route
             path={prop.layout + prop.path}
             render={(props) => <prop.component {...props} />}
             key={key}
           />
+
         );
       } else {
         return null;
@@ -47,8 +49,8 @@ function Admin() {
   }, [location]);
   return (
     <>
-      <div className="wrapper">
-        <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
+      {login ? (<div><div className="wrapper">
+        <Sidebar color={"black"} routes={routes} />
         <div className="main-panel" ref={mainPanel}>
           <AdminNavbar />
           <div className="content">
@@ -57,14 +59,12 @@ function Admin() {
           <Footer />
         </div>
       </div>
-      <FixedPlugin
-        hasImage={hasImage}
-        setHasImage={() => setHasImage(!hasImage)}
-        color={color}
-        setColor={(color) => setColor(color)}
-        image={image}
-        setImage={(image) => setImage(image)}
-      />
+      </div>) : (<div>
+
+
+      </div>)}
+
+
     </>
   );
 }

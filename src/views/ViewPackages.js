@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 // react-bootstrap components
 import {
@@ -12,6 +13,25 @@ import {
 } from "react-bootstrap";
 
 function ViewPackage() {
+    const [data, getData] = useState([])
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = () => {
+        fetch("http://localhost:8081/packages")
+            .then((res) =>
+                res.json())
+
+            .then((response) => {
+                console.log(response);
+                getData(response);
+            })
+
+    }
+
+
     return (
         <>
             <Container fluid>
@@ -30,16 +50,22 @@ function ViewPackage() {
                                             <th className="border-0">Price</th>
                                             <th className="border-0">Group Members Count</th>
                                             <th className="border-0">Activities</th>
+                                            <th className="border-0">About the package</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Dakota Rice</td>
-                                            <td>$36,738</td>
-                                            <td>Niger</td>
-                                            <td>Oud-Turnhout</td>
-                                        </tr>
+                                        {data.map((item, i) => (
+                                            <tr key={i}>
+                                                <td>{item.packageID}</td>
+                                                <td>{item.packageType}</td>
+                                                <td>{item.price}</td>
+                                                <td>{item.noOfPeople}</td>
+                                                <td>{item.activity}</td>
+                                                <td>{item.aboutPackage}</td>
+
+
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </Table>
                             </Card.Body>

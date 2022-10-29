@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 
 // react-bootstrap components
 import {
@@ -11,29 +12,101 @@ import {
     Table
 } from "react-bootstrap";
 
+
+
 function Maps() {
 
+    const [reservationID, setreservationID] = useState('');
     const [clientId, setClientId] = useState('');
     const [packageId, setpackageId] = useState('');
     const [roomId, setroomId] = useState('');
     const [CheckInDate, setCheckInDate] = useState('');
     const [checkOutDate, setcheckOutDate] = useState('');
     const [members, setmembers] = useState('');
+    // const [roomStatus] = useState('false');
+    const [data, getData] = useState([])
 
-    function addHandler(e) {
-        e.preventDefault();
+    useEffect(() => {
+        fetchData()
+    }, [])
 
-        console.log(clientId, packageId, roomId, CheckInDate, checkOutDate, members)
+    const fetchData = () => {
+        fetch("http://localhost:8082/reservations")
+            .then((res) =>
+                res.json())
+
+            .then((response) => {
+                console.log(response);
+                getData(response);
+            })
+
     }
 
-    const url = ""
 
     function submitHandler(e) {
         e.preventDefault();
 
+        const url = "http://localhost:8082/reservations"
+        Axios.post(url, {
+            cusId: clientId,
+            packageId: packageId,
+            roomId: roomId,
+            checkIn: CheckInDate,
+            checkOut: checkOutDate,
+            members: members
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
+
+        const urlroom = `http://localhost:8080/rooms/${roomId}`
+        Axios.put(urlroom, {
+            roomId: roomId,
+            // roomStatus: roomStatus
+
+        })
+        console.log(roomId);
+
+
 
     }
 
+    function updateHandler(e) {
+        const url = "http://localhost:8082/reservations"
+        Axios.put(url, {
+
+            reservation_id: reservationID,
+            cusId: clientId,
+            packageId: packageId,
+            roomId: roomId,
+            checkIn: CheckInDate,
+            checkOut: checkOutDate,
+            members: members
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
+    }
+
+    function deleteHandler(reservationID) {
+
+
+        const url = `http://localhost:8082/reservations/${reservationID}`
+        Axios.delete(url, {
+            reservation_id: reservationID
+
+        })
+            .then(res => {
+
+                console.log("DONE")
+                fetchData()
+            })
+
+    }
     return (
         <Container fluid>
             <Row>
@@ -45,6 +118,16 @@ function Maps() {
                         <Card.Body>
                             <Form onSubmit={submitHandler}>          {/* Form details */}
                                 <Row>
+                                    <Col className="pr-1" md="5">
+                                        <Form.Group>
+                                            <label>Reservation ID (Optional)</label>
+                                            <Form.Control
+                                                type="text"
+                                                value={reservationID}
+                                                onChange={(e) => setreservationID(e.target.value)}
+                                            ></Form.Control>
+                                        </Form.Group>
+                                    </Col>
                                     <Col className="pr-1" md="5">
                                         <Form.Group>
                                             <label>Client ID</label>
@@ -122,7 +205,6 @@ function Maps() {
                                             className="btn-fill pull-right"
                                             variant="info"
                                             type="submit"
-                                            onClick={addHandler}
                                         >
                                             Add
                                         </Button>
@@ -131,8 +213,8 @@ function Maps() {
                                     <Col >
                                         <Button
                                             className="btn-fill pull-right"
-                                            type="submit"
                                             variant="info"
+                                            onClick={updateHandler}
                                         >
                                             Update
                                         </Button>
@@ -141,7 +223,7 @@ function Maps() {
                                     <Col >
                                         <Button
                                             className="btn-fill pull-right"
-                                            type="submit"
+                                            onClick={() => deleteHandler(reservationID)}
                                             variant="info"
                                         >
                                             Delete
@@ -168,6 +250,7 @@ function Maps() {
                             <Table className="table-hover">
                                 <thead>
                                     <tr>
+                                        <th className="border-0">Reservation ID</th>
                                         <th className="border-0">Client ID</th>
                                         <th className="border-0">Package ID</th>
                                         <th className="border-0">Room Id</th>
@@ -178,15 +261,19 @@ function Maps() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>2022.6.7</td>
-                                        <td>2022.10.4</td>
-                                        <td>2</td>
+                                    {data.map((item, i) => (
+                                        <tr key={i}>
+                                            <td>{item.reservation_id}</td>
+                                            <td>{item.cusId}</td>
+                                            <td>{item.packageId}</td>
+                                            <td>{item.roomId}</td>
+                                            <td>{item.checkIn}</td>
+                                            <td>{item.checkOut}</td>
+                                            <td>{item.members}</td>
 
-                                    </tr>
+
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </Table>
                         </Card.Body>

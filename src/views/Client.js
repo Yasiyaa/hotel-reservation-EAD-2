@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 // react-bootstrap components
 import {
@@ -14,6 +15,26 @@ import {
 } from "react-bootstrap";
 
 function Client() {
+
+    const [data, getData] = useState([])
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const fetchData = () => {
+        fetch("http://localhost:8080/users")
+            .then((res) =>
+                res.json())
+
+            .then((response) => {
+                console.log(response);
+                getData(response);
+            })
+
+    }
+
+
     return (
         <>
             <Container fluid>
@@ -34,12 +55,13 @@ function Client() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Dakota Rice</td>
-                                            <td>$36,738</td>
-
-                                        </tr>
+                                        {data.map((item, i) => (
+                                            <tr key={i}>
+                                                <td>{item.id}</td>
+                                                <td>{item.name}</td>
+                                                <td>{item.email}</td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </Table>
                             </Card.Body>
