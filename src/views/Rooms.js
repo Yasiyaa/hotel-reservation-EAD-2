@@ -9,7 +9,8 @@ import {
     Container,
     Row,
     Col,
-    Table
+    Table,
+    Alert
 
 } from "react-bootstrap";
 
@@ -47,7 +48,10 @@ function Rooms() {
         })
             .then(res => {
 
+                alert("Submitted success")
                 console.log("DONE")
+
+
             })
 
 
@@ -63,7 +67,7 @@ function Rooms() {
         })
             .then(res => {
 
-                console.log("DONE")
+                alert("Update success")
                 fetchData()
             })
     }
@@ -76,7 +80,7 @@ function Rooms() {
         })
             .then(res => {
 
-                console.log("DONE")
+                alert("Delete success")
                 fetchData()
             })
 

@@ -57,7 +57,7 @@ function Packages() {
         })
             .then(res => {
 
-                console.log("DONE")
+                alert("Submitted success")
                 fetchData()
             })
 
@@ -77,7 +77,7 @@ function Packages() {
         })
             .then(res => {
 
-                console.log("DONE")
+                alert("Update success")
                 fetchData()
             })
 
@@ -92,7 +92,7 @@ function Packages() {
         })
             .then(res => {
 
-                console.log("DONE")
+                alert("Delete success")
                 fetchData()
             })
     }

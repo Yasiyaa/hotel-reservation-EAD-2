@@ -23,7 +23,7 @@ function Client() {
     }, [])
 
     const fetchData = () => {
-        fetch("http://localhost:8080/users")
+        fetch("http://localhost:8083/users/clients")
             .then((res) =>
                 res.json())
 
@@ -52,6 +52,7 @@ function Client() {
                                             <th className="border-0">Name</th>
                                             <th className="border-0">E-mail</th>
 
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -60,6 +61,7 @@ function Client() {
                                                 <td>{item.id}</td>
                                                 <td>{item.name}</td>
                                                 <td>{item.email}</td>
+
                                             </tr>
                                         ))}
                                     </tbody>

@@ -56,9 +56,8 @@ function Maps() {
             members: members
         })
             .then(res => {
-
-                console.log("DONE")
                 fetchData()
+                alert("Submitted success")
             })
 
         const urlroom = `http://localhost:8080/rooms/${roomId}`
@@ -87,7 +86,7 @@ function Maps() {
         })
             .then(res => {
 
-                console.log("DONE")
+                alert("Update success")
                 fetchData()
             })
     }
@@ -102,7 +101,7 @@ function Maps() {
         })
             .then(res => {
 
-                console.log("DONE")
+                alert("Delete success")
                 fetchData()
             })
 
