@@ -42,13 +42,7 @@ const dashboardRoutes = [
     component: ClientDetail,
     layout: "/admin"
   },
-  {
-    path: "/packege-details",
-    name: "View packages",
 
-    component: ViewPackage,
-    layout: "/admin"
-  },
   {
     path: "/reservation-details",
     name: "Make reservation",
